@@ -1,5 +1,6 @@
 package br.com.alura.Challenge.Backend3.controller;
 
+import br.com.alura.Challenge.Backend3.service.dao.DateOfTransactionDAO;
 import br.com.alura.Challenge.Backend3.service.dao.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,9 +18,17 @@ public class CadastroTransacaoController {
     @Autowired
     StorageService storageService;
 
+    @Autowired
+    DateOfTransactionDAO dateOfTransactionDAO;
+
+    private String message;
+
     @GetMapping("/form")
     public String formUploadFile(Model model) {
-        model.addAttribute("frase", null);
+
+        model.addAttribute("frase", this.message);
+        model.addAttribute("transactions", this.dateOfTransactionDAO.selectAll());
+        this.message = null;
         return "form_upload";
     }
 
@@ -30,10 +39,8 @@ public class CadastroTransacaoController {
             System.out.println("\n" + fileUploaded.getOriginalFilename() + "; size: " + fileUploaded.getSize() + "\n");
 
             try {
-                String result = this.storageService.storageData(fileUploaded.getInputStream());
-                ModelAndView mv = new ModelAndView("form_upload");
-                mv.addObject("frase", result);
-                return mv;
+                this.message = this.storageService.storageTransactionData(fileUploaded.getInputStream());
+
             } catch (Exception exception) {
                 exception.printStackTrace();
             }

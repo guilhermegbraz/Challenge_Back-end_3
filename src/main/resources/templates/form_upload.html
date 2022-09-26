@@ -34,6 +34,33 @@
             </div>
         </form>
 
+        <br>
+
+        <div class="card bg-dark mt-5">
+            <section class="card-header border-bottom border-success mx-3"> <h3 class="text-success text-center">Importações Realizadas</h3></section>
+            <div class="card-body">
+                <table class="table table-dark table-hover ">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Data transações</th>
+                        <th scope="col">Data Importação</th>
+                    </tr>
+                    </thead>
+
+                    <tbody th:each="transaction : ${transactions}">
+                        <tr>
+                            <th th:text="${transaction.id}" scope="row">1</th>
+                            <td th:text="${#temporals.format(transaction.dataHoraImportacao, 'dd/MMM/yyyy HH:mm')}" > aaa</td>
+                            <td th:text="${#temporals.format(transaction.dataTransacao, 'dd/MMM/yyyy')}" > bbbbb</td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
     </main>
 
 </body>
