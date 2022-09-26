@@ -3,6 +3,7 @@ package br.com.alura.Challenge.Backend3.service.validation;
 import br.com.alura.Challenge.Backend3.model.Transaction;
 import br.com.alura.Challenge.Backend3.service.dao.TransactionDAO;
 import br.com.alura.Challenge.Backend3.service.validation.exception.DataTransactionException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.List;
@@ -10,9 +11,20 @@ import java.util.List;
 @Service
 public class TransactionDuplicatedValidation implements TransactionValidator{
 
-    private final TransactionDAO transactionDAO;
+    @Autowired
+    private TransactionDAO transactionDAO;
 
-    public TransactionDuplicatedValidation(TransactionDAO transactionDAO) {
+    public TransactionDAO getTransactionDAO() {
+        return transactionDAO;
+    }
+    public TransactionDuplicatedValidation() {
+
+    }
+    public TransactionDuplicatedValidation(TransactionDAO dao) {
+        this.transactionDAO = dao;
+    }
+
+    public void setTransactionDAO(TransactionDAO transactionDAO) {
         this.transactionDAO = transactionDAO;
     }
 
