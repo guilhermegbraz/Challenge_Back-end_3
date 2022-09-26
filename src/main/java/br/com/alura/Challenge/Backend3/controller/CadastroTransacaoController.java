@@ -30,9 +30,9 @@ public class CadastroTransacaoController {
             System.out.println("\n" + fileUploaded.getOriginalFilename() + "; size: " + fileUploaded.getSize() + "\n");
 
             try {
-                this.storageService.storageData(fileUploaded.getInputStream());
+                String result = this.storageService.storageData(fileUploaded.getInputStream());
                 ModelAndView mv = new ModelAndView("form_upload");
-                mv.addObject("frase", "Arquivo importado com sucesso !");
+                mv.addObject("frase", result);
                 return mv;
             } catch (Exception exception) {
                 exception.printStackTrace();

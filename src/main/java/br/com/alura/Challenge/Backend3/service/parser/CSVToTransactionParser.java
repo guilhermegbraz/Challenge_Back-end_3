@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.InputStream;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -41,7 +42,7 @@ public class CSVToTransactionParser implements Parser<Transaction> {
                 try{Scanner line = new Scanner(file.nextLine());
                     line.useDelimiter(",");
                     Transaction tr = new Transaction(line.next(), line.next(), line.next(), line.next(), line.next(),
-                            line.next(), new BigDecimal(line.next()), line.next());
+                            line.next(), new BigDecimal(line.next()), LocalDateTime.parse(line.next()));
 
                     transactions.add(tr);
                 } catch (Exception e) {

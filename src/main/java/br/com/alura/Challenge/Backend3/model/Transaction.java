@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Entity
 public class Transaction {
@@ -19,10 +20,11 @@ public class Transaction {
     private String agenciaDestino;
     private String contaDestino;
     private BigDecimal valorDaTransacao;
-    private String dataHoraTransacao;
+    private LocalDateTime dataHoraTransacao;
 
     public Transaction(){}
-    public Transaction(String bancoOrigem, String agenciOrigem, String contaOrigem, String bancoDestino, String agenciaDestino, String contaDestino, BigDecimal valorDaTransacao, String dataHoraTransacao) {
+    public Transaction(String bancoOrigem, String agenciOrigem, String contaOrigem, String bancoDestino,
+                       String agenciaDestino, String contaDestino, BigDecimal valorDaTransacao, LocalDateTime dataHoraTransacao) {
         this.bancoOrigem = bancoOrigem;
         this.agenciOrigem = agenciOrigem;
         this.contaOrigem = contaOrigem;
@@ -75,7 +77,7 @@ public class Transaction {
         return valorDaTransacao;
     }
 
-    public String getDataHoraTransacao() {
+    public LocalDateTime getDataHoraTransacao() {
         return dataHoraTransacao;
     }
 }
