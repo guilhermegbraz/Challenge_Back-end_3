@@ -1,6 +1,6 @@
 package br.com.alura.Challenge.Backend3.controller;
 
-import br.com.alura.Challenge.Backend3.model.service.CSVToTransactionParser;
+import br.com.alura.Challenge.Backend3.service.dao.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,7 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class CadastroTransacaoController {
 
     @Autowired
-    CSVToTransactionParser parser;
+    StorageService storageService;
 
     @GetMapping("/form")
     public String formUploadFile(Model model) {
@@ -30,8 +30,7 @@ public class CadastroTransacaoController {
             System.out.println("\n" + fileUploaded.getOriginalFilename() + "; size: " + fileUploaded.getSize() + "\n");
 
             try {
-                this.parser.setCvsFile(fileUploaded.getInputStream());
-                System.out.println(parser.getAllTransactions());
+                this.storageService.storageData(fileUploaded.getInputStream());
                 ModelAndView mv = new ModelAndView("form_upload");
                 mv.addObject("frase", "Arquivo importado com sucesso !");
                 return mv;
