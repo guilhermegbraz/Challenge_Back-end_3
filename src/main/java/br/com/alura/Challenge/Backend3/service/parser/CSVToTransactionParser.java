@@ -1,4 +1,4 @@
-package br.com.alura.Challenge.Backend3.model.service;
+package br.com.alura.Challenge.Backend3.service.parser;
 
 import br.com.alura.Challenge.Backend3.model.Transaction;
 import org.springframework.stereotype.Service;
@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Scanner;
 
 @Service
-public class CSVToTransactionParser {
+public class CSVToTransactionParser implements Parser<Transaction> {
 
     InputStream cvsFile;
     private int currentLine;
@@ -31,7 +31,8 @@ public class CSVToTransactionParser {
         return cvsFile;
     }
 
-    public List<Transaction> getAllTransactions() {
+    @Override
+    public List<Transaction> getAllData() {
         List<Transaction> transactions = new ArrayList<>();
 
         try (Scanner file = new Scanner(this.cvsFile)){
